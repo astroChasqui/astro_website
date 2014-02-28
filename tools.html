@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>Ivan Ramirez - Tools</title>
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <script src="js/functions.js"></script>
+</head>
+
+<body id="body_tools">
+  <div id="container">
+    <?php include "header.html"?>
+    <div id="content">
+
+      <p align="right">Click on the headers for info.</p>
+
+      <?php
+        include "php/tools.php";
+        if ($errMsg != "") echo "<strong>$errMsg</strong>";
+      ?>
+
+      <h3 id="ct_info_switch" onclick="showInfo('ct_info');">
+          + Color-T<sub>eff</sub>
+      </h3>
+
+        <p id="ct_info" class="tools_info" hidden>
+          Uses Casagrande et al. (2010, A&A, 512, 54) color calibrations to calculate effective temperatures of dwarf and subgiant stars.
+        </p>
+        <form method="post">
+          <select name='color'>
+            <?php
+              $colors = array("B-V", "b-y", "V-Ks", "BT-VT", "VT-Ks");
+              foreach ($colors as $acolor) {
+                if ($acolor == $color) $sel="selected"; else $sel="";
+                echo "<option $sel>$acolor</option>";
+              }
+            ?>
+          </select>
+          = <input type="text" name="color_value"
+                 maxlength="5" style="width: 50px;"
+                 value=<?php echo $color_value;?> >
+          [Fe/H] =
+          <input type="text" name="feh_ct"
+                 maxlength="5" style="width: 50px;"
+                 value=<?php echo $feh_ct;?> >
+          <input type="submit" name="color_teff" value="Submit" >
+          T<sub>eff</sub> =
+          <input type="text" name="color_teff_value" disabled
+                 style="width: 45px; color: green;" maxlength="4" 
+                 value=<?php echo $color_teff_value;?> >
+        </form>
+
+
+
+
+
+    <h3 id="mag_info_switch" onclick="showInfo('mag_info');">
+        + Model Atmosphere Generator
+    </h3>
+      <p id="mag_info" class="tools_info" hidden>
+        Generates an input model atmosphere for MOOG. If not found in the grid,
+        linear interpolation is performed. Kurucz and MARCS models are
+        available. The output file is in MOOG's KURUCZ format.
+        <!--The interpolation code is available
+        here, but you will need this large collection of files containing
+        the model
+        grids (and set the proper paths within the code). Email me if you need
+        help.-->
+      </p>
+      <form method="post">
+        <?php
+          echo <<<__________END
+          T<sub>eff</sub> =<input type="text" name="teff" value="$teff"
+                                  style="width: 45px;" maxlength="4"/>
+          log g =<input type="text" name="logg" value="$logg"
+                        style="width: 45px;" maxlength="4"/>
+          [Fe/H] =<input type="text" name="feh" value="$feh"
+                         style="width: 50px;" maxlength="5"/>
+          vt =<input type="text" name="vt" value="$vt"
+                     style="width: 45px;" maxlength="4"/>
+          <br />
+          Grid :<select name="grid">
+__________END;
+          $grids = array("odfnew", "aodfnew", "over", "nover", "marcs");
+          foreach ($grids as $agrid) {
+            if ($agrid == $grid) $sel="selected"; else $sel="";
+            echo "<option $sel>$agrid</option>";
+          }
+          echo "</select>";
+        ?>
+        <input type="hidden" name="model_atmosphere_generator" value="go"/>
+        <input type="submit" value="Submit" />
+      </form>
+
+    <h3 id="nlte_info_switch" onclick="showInfo('nlte_info');">
+        + Non-LTE corrections for the 777 nm O I lines
+    </h3>
+
+      <p id="nlte_info" class="tools_info" hidden>
+        Uses Ramirez et al. (2007) grid of non-LTE corrections. 
+        <!--The grid is
+        available here, as is the interpolation code.-->
+      </p>
+      <form method="post">
+        <?php
+          echo <<<__________END
+          T<sub>eff</sub> =<input type="text" name="teff_nlte"
+                                  value="$teff_nlte" style="width: 45px;"
+                                  maxlength="4"/>
+          log g =<input type="text" name="logg_nlte" value="$logg_nlte" 
+                        style="width: 45px;" maxlength="4"/>
+          [Fe/H] =<input type="text" name="feh_nlte" value="$feh_nlte" 
+                         style="width: 50px;" maxlength="5"/>
+          <br />
+          A(O) = <input type="text" name="ao1" value="$ao1"
+                        style="width: 45px;" maxlength="4"/>
+                 <input type="text" name="ao2" value="$ao2"
+                        style="width: 45px;" maxlength="4"/>
+                 <input type="text" name="ao3" value="$ao3"
+                        style="width: 45px;" maxlength="4"/>
+__________END;
+        ?>
+        <input type="hidden" name="nlte" value="go"/>
+        <input type="submit" value="Submit" />
+        <?php
+          echo <<<__________END
+          <br /><msg>
+          Non-LTE corrections =
+                 <input type="text" name="d1" value="$d0" disabled
+                        style="width: 50px; color: green;"
+                        maxlength="4"/>
+                 <input type="text" name="d2" value="$d1" disabled
+                        style="width: 50px; color: green;" maxlength="4"/>
+                 <input type="text" name="d3" value="$d2" disabled
+                        style="width: 50px; color: green;" maxlength="4"/>
+          </msg>
+__________END;
+        ?>
+      </form>
+
+    </div>
+    <?php include "footer.html"?>
+  </div>
+</body>
+
+</html>

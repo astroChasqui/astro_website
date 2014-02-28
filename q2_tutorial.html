@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>Ivan Ramirez - q2 Tutorial</title>
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+
+<body>
+  <div id="container">
+    <?php include "header.html"?>
+
+    <div id="content">
+
+      <p>The q<sup>2</sup> Tutorial is available as a set of iPython notebooks on <a href="https://github.com/astroChasqui/q2/tree/master/Tutorial">GitHub</a>. A few csv files are included for testing. The following are links to the HTML versions of those notebooks, but keep in mind that you will need the csv files to follow the Tutorial.</p>
+
+      <?php
+        $path = "http://htmlpreview.github.io/?".
+                "https://github.com/astroChasqui/q2/".
+                "blob/master/Tutorial/Web/"
+      ?>
+
+      <ol>
+        <a href=<?php echo $path.'1.%20Introduction.html'?> target="_blank">
+          <li>Introduction</li>
+        </a>
+        <li>Solving for stellar parameters</li>
+        <li>Working with a sample of stars</li>
+        <li>Elemental abundances</li>
+        <li>Mass, age, and other stellar parameters</li>
+      </ol>
+
+    </div>
+    <?php include "footer.html"?>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>Ivan Ramirez - q2</title>
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+
+<body id="body_q2">
+  <div id="container">
+    <?php include "header.html"?>
+
+    <div id="content">
+
+      <p>
+        Qoyllur-quipu (q<sup>2</sup>) is a <a href="http://www.python.org/">Python</a> package that helps astronomers to determine atmospheric parameters of stars using the iron line excitation/ionization equilibrium technique. It can also be used to measure elemental abundances and other fundamental stellar parameters such as mass, radius, luminosity, and age. It employs the spectrum synthesis code <a href="http://www.as.utexas.edu/~chris/moog.html">MOOG</a>, a grid of model stellar atmospheres (<a href="http://kurucz.harvard.edu/grids.html">Kurucz</a> or <a href="http://marcs.astro.uu.se/">MARCS</a>), and a theoretical isochrone set (<a href="http://www.astro.yale.edu/demarque/yyiso.html">Yonsei-Yale</a>). A web-based extension of this software (q<sup>2</sup>web) is under development. The source code is available on <a href="https://github.com/astroChasqui/q2">GitHub</a>.
+      </p>
+
+      <p>
+        In short, q<sup>2</sup> takes as input two comma-separated values files: one with star data such as initial guess values for T<sub>eff</sub>, log <i>g</i>, etc., and another with spectral line data, i.e., atomic parameters and equivalent widths of any number of stars. A simple series of commands will then solve for the stellar parameters that satisfy excitation/ionization equilibrium (in this example using MARCS models and the data for 'Sun' as reference, i.e., a line-by-line differential analysis):
+      </p>
+      
+      <div style="text-align:center">
+        <span id="code_box">
+          <code>
+            >>> import q2<br />
+            >>> data = q2.Data('stars.csv', 'lines.csv')<br />
+            >>> sp = q2.specpars.SolvePars(grid='marcs')<br />
+            >>> q2.specpars.solve_all(data, sp, 'solution.csv', 'Sun')
+          </code>
+        </span>
+      </div>
+      
+      <p>
+        The q<sup>2</sup> code is much more flexible than this simple example suggests (and in principle easily extendable). This <a href="q2_tutorial.html">Tutorial</a> has more information on the many different options that are available.</p>
+
+      <p>
+        Qoyllur and quipu are words in Quechua, a language currently spoken by millions of people in the highlands of South America. It was the official language of the Inca empire and one of the present-day official languages of Peru. The word qoyllur means star, while quipu was a device used in accounting, a form of calculator. Thus, qoyllur-quipu roughly translates to ''star calculator.''
+      </p>
+
+    </div>
+    <?php include "footer.html"?>
+  </div>
+</body>
+
+</html>

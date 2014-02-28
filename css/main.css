@@ -1,0 +1,129 @@
+@import url('http://fonts.googleapis.com/css?family=\
+Maven+Pro:500|Alegreya+Sans+SC:700');
+
+body {
+  font-family: 'Maven Pro', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  background: #203030;
+  background-repeat: repeat;
+}
+p {
+  line-height: 175%;
+  text-align: justify;
+}
+a {
+  color: #336600;
+  text-decoration: none;
+}
+a:hover {
+  color: #339900;
+  text-decoration: underline;
+}
+h3 {
+  display: table;
+  color: #336600;
+  cursor: pointer;
+}
+h3:hover {
+  color: #339900;
+}
+form {
+  text-align: center;
+}
+input, select {
+  font: inherit;
+  border-radius: 5px;
+  margin: 5px 0 12px 0px;
+  text-align: center;
+  background: #FFFFFF;
+  border: 1px solid;
+  box-shadow: inset 0 0 1px 1px #888;
+}
+strong {
+  color: red;
+}
+code {
+  font-family: 'Lucida Console', sans-serif;
+  color: #FFFF33;
+  font-size: 13px;
+  line-height: 150%;
+}
+iframe {
+  width: 670px;
+  height: 600px;
+}
+
+#container {
+  width: 700px;
+  background: #FFFFFF;
+  margin: 0px auto 0px auto;
+  border-radius: 10px;
+}
+
+#header {
+  font-family: 'Alegreya Sans SC', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  padding-top: 15px;
+  background: #FFFFCC;
+  border-radius: 15px 15px 0 0;
+}
+#header ul {
+  margin: 0px auto 0px auto;
+  text-align: center;
+  padding: 0px;
+}
+#header li {
+  display: inline;
+  margin: 0px 15px;
+}
+#header a {
+  text-decoration: none;
+}
+
+#content {
+  padding: 0 15px 0 15px;
+  background: #FFFFFF;
+}
+#content img {
+  padding: 5px 0px 0px 15px;
+}
+#content .tools_info {
+  margin-left: 15px;
+  margin-right: 30px;
+}
+#code_box {
+  text-align: left;
+  display: inline-block;
+  background:black;
+  border-radius:5px;
+  padding: 15px 25px;
+  margin: 0 auto;
+}
+#content li {
+  line-height: 150%;
+}
+
+#footer {
+  background: #FFFFCC;
+  border-radius: 0 0 15px 15px;
+}
+#footer ul {
+  text-align: center;
+  padding-bottom: 8px;
+}
+#footer li {
+  display: inline;
+  margin: 0px 4px;
+}
+
+/*highlight active page in header menu*/
+body#body_home a#menu_home,
+body#body_research a#menu_research,
+body#body_publications a#menu_publications,
+body#body_tools a#menu_tools,
+body#body_q2 a#menu_q2
+{
+  color: #0066CC;
+}

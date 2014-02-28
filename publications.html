@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>Ivan Ramirez - Publications</title>
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+
+  <link rel="stylesheet" type="text/css" href="css/ads_query_importer_widget.css">
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+  <script type="text/javascript">
+  //mandatory parameters 
+  var ads_query_url = 'http://adsabs.harvard.edu/cgi-bin/basic_connect?qsearch=Ramirez%2CIvan';
+  //List of optional parameters for the query 
+  var ads_query_back_base_url = 'http://adsabs.harvard.edu/';
+  var ads_query_title = "ADS basic query for 'Ramirez, Ivan' sorted by relevance.";
+  //var ads_query_highlight_author = 'Ramirez';
+  var ads_query_max_num_authors = 3;
+  var ads_query_max_records_to_print = 10;
+  var ads_query_omit_bibcode = false;
+  var ads_query_omit_link_to_ads = false;
+  var ads_query_link_on_field = 'title';
+  var ads_query_print_order = 'title|authors|journal';
+  </script>
+  <script type="text/javascript" src="js/ads_query_importer_widget.js"></script>
+
+</head>
+
+<body id="body_publications">
+  <div id="container">
+    <?php include "header.html"?>
+    <div id="content">
+
+      <div id="ads_query_importer_widget"
+           style="width:650px;padding-right:15px;">
+        <p>Retrieving ADS data. Please wait a few seconds ...</p>
+      </div>
+
+    </div>
+    <?php include "footer.html"?>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>Ivan Ramirez - Twitter</title>
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <script src="js/functions.js"></script>
+</head>
+
+<body>
+  <div id="container">
+    <?php include "header.html"?>
+    <div id="content">
+
+      <p style="text-align:center;">
+        #astronomy
+        <input id="twitter_checkbox" type="checkbox" checked
+               onChange="twitterSwitch();">
+        </input>
+      </p>
+      <p id="ast_twitts" style="text-align:center;">
+        <a class="twitter-timeline"
+           href="https://twitter.com/search?q=FROM%3A%40astrochasqui+AND+%23astronomy"
+           data-widget-id="364867733692747777">
+           Tweets about "FROM:@astrochasqui AND #astronomy"
+        </a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],
+                p=/^http:/.test(d.location)?'http':'https';
+                if(!d.getElementById(id)){js=d.createElement(s);js.id=id;
+                js.src=p+"://platform.twitter.com/widgets.js";
+                fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+        </script>
+      </p>
+      <p hidden id="all_twitts" style="text-align:center;">
+        <a class="twitter-timeline"
+           href="https://twitter.com/astroChasqui"
+           data-widget-id="294555041451347968">Tweets by @astroChasqui
+        </a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],
+                p=/^http:/.test(d.location)?'http':'https';
+                if(!d.getElementById(id)){js=d.createElement(s);js.id=id;
+                js.src=p+"://platform.twitter.com/widgets.js";
+                fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+        </script>
+      </p>
+
+    </div>
+    <?php include "footer.html"?>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>Ivan Ramirez - Research</title>
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <script src="js/functions.js"></script>
+</head>
+
+<body id="body_research">
+  <div id="container">
+    <?php include "header.html"?>
+    <div id="content">
+
+      <p>
+        These are my research interests. Click on them for highlights of my work on these topics.
+      </p>
+      <h3 id="exoplanets_switch" onclick="showInfo('exoplanets');">
+          + Exoplanet host stars
+      </h3>
+        <div id="exoplanets" hidden>
+          <p>
+            When planets form, they retain metals that would otherwise end up in the star. Thus, small metallicity deficiences are expected in planet-host stars. This effect is seen, for example,
+            in the 16 Cygni binary system:
+          </p>
+          <div align="center">
+            <img src="images/16cyg.png" width="400">
+          </div>
+          <p>
+            The secondary star, 16 Cyg B, is slightly metal-poor relative to the primary, 16 Cyg A. The former is known to host a gas giant planet. These chemical signatures of planet formation can be used to identify and/or investigate exoplanet populations.
+          </p>
+        </div>
+
+      <h3 id="gce_switch" onclick="showInfo('gce');">
+          + Galactic chemical evolution
+      </h3>
+        <div id="gce" hidden>
+          <p>
+            The solar neighborhood contains stars from the so-called thin-disk (black crosses) as well as stars from the thick-disk (red circles) of the Milky Way. Their oxygen-to-iron abundance ratios are dependent on their kinematics, but the correlation is not perfect:
+          </p>
+          <div align="center">
+            <img src="images/gce.png" width="400">
+          </div>
+          <p>
+            This suggests that the Galactic thin and thick disks are not
+            independent entities, but different extremes of the overall disk
+            population. In addition to mergers with small satelite galaxies, 
+            radial mixing (stars traveling large distances towards 
+            and away from
+            the Galactic center) may be required to 
+            explain these data.
+          </p>
+        </div>
+
+      <h3 id="granulation_switch" onclick="showInfo('granulation');">
+          + Surface convection
+      </h3>
+        <div id="granulation" hidden>
+          <p>
+            The surfaces of cool stars are not static. Hot ascending cells of gas are surrounded by cool regions that fall back into the star's interior. This phenomenon, granulation, is observed in images of the Sun's surface. For distant stars, like the very-metal poor red giant star HD122563 shown below, the effects of surface convection can be seen in very high-quality spectra, for example by measuring the shape and amplitude of spectral line bisectors:
+          </p>
+          <div align="center">
+            <img src="images/granulation.png" width="400">
+          </div>
+          <p>
+            These observations help theorists calculate 3D hydrodynamic models of stellar atmospheres. The dashed line is where all the line bisectors should be if standard static, one-dimensional models of stellar atmospheres, which some astronomers use on a daily basis, were correct.
+          </p>
+        </div>
+
+      <h3 id="lithium_switch" onclick="showInfo('lithium');">
+          + Lithium depletion
+      </h3>
+        <div id="lithium" hidden>
+          <p>
+            Lithium is a fragile element that allows us to probe stellar interiors and their long-term evolution. Observations of lithium abundances in solar-type stars can be used to investigate rotation and the potential impact of external factors such as stellar and sub-stellar mass companions. The figure below shows the largest compilation of published measurements of lithium abundances made to date:
+          </p>
+          <div align="center">
+            <img src="images/lithium.png" width="400">
+          </div>
+        </div>
+
+      <h3 id="teff_switch" onclick="showInfo('teff');">
+          + Effective temperatures of FGK stars
+      </h3>
+        <div id="teff" hidden>
+          <p>
+            The most important observational parameter of a solar-type star is its effective temperature (roughly it's surface temperature). It can be measured in many different ways, but probably the most accurate technique is the so-called InfraRed Flux Method (IRFM). Indeed, angular diameters derived using IRFM effective temperatures agree almost perfectly with direct interferometric measurements:
+          </p>
+          <div align="center">
+            <img src="images/teff.png" width="400">
+          </div>
+        </div>
+
+    </div>
+    <?php include "footer.html"?>
+  </div>
+</body>
+
+</html>
