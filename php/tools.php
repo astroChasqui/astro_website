@@ -2,12 +2,21 @@
 
   session_start();
 
+  /*
   $PATH = getenv("PATH");
   putenv("PATH=".
               "/home/ivan/Dropbox/Code/python:".
               "/home/ivan/Programs/anaconda/bin:".
               "$PATH");
   putenv("XDG_CONFIG_HOME=/var/www");
+  */
+
+  $PATH = getenv("PATH");
+  putenv("PATH=".
+              "/home/astrochasqui/code/python:".
+              "/home/astrochasqui/bin:".
+              "$PATH");
+  putenv("XDG_CONFIG_HOME=/home/astrochasqui/webapps/astro");
 
   $errMsg = "";
 
