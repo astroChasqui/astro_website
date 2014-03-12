@@ -78,13 +78,14 @@
     $x = array("teff_mag", "logg_mag", "feh_mag", "vt_mag");
     foreach($x as $xi)
       if ($_POST[$xi] == "")
-        $errMsg = "[Model Atmosphere Generator] One or more fields are empty.";
+        $errMsg = "[Model Atmosphere Generator] One or more fields are ".
+                  "empty.";
+    $teff = $_SESSION["teff_mag"] = $_POST["teff_mag"];
+    $logg = $_SESSION["logg_mag"] = $_POST["logg_mag"];
+    $feh = $_SESSION["feh_mag"] = $_POST["feh_mag"];
+    $vt = $_SESSION["vt_mag"] = $_POST["vt_mag"];
+    $grid = $_SESSION["grid_mag"] = $_POST["grid_mag"];
     if ($errMsg == "") {
-      $teff = $_SESSION["teff_mag"] = $_POST["teff_mag"];
-      $logg = $_SESSION["logg_mag"] = $_POST["logg_mag"];
-      $feh = $_SESSION["feh_mag"] = $_POST["feh_mag"];
-      $vt = $_SESSION["vt_mag"] = $_POST["vt_mag"];
-      $grid = $_SESSION["grid_mag"] = $_POST["grid_mag"];
       if ($feh>=0) $fehx="p".abs($feh); else $fehx="m".abs($feh);
       $fname = "tools_files/t$teff"."g$logg$fehx.$grid";
       if (!file_exists($fname)) {
@@ -99,12 +100,15 @@
         flush();
         readfile($fname);
       } else {
-        $errMsg = "[Model Atmosphere Generator] Could not interpolate model.";
+        $errMsg = "[Model Atmosphere Generator] Could not interpolate ".
+                  "model.";
       }
     }
     $_SESSION["errMsg"] = $errMsg;
-    header("Location:".$_SERVER["PHP_SELF"]);
-    exit();
+    if ($errMsg != "") {
+      header("Location:".$_SERVER["PHP_SELF"]);
+      exit();
+    }
   }
   if(isset($_SESSION["teff_mag"])) {
     $errMsg = $_SESSION["errMsg"];
@@ -134,13 +138,13 @@
     foreach($x as $xi)
       if ($_POST[$xi] == "")
          $errMsg = "[NLTE oxygen triplet] One or more fields are empty.";
+    $teff_nlte = $_SESSION["teff_nlte"] = $_POST["teff_nlte"];
+    $logg_nlte = $_SESSION["logg_nlte"] = $_POST["logg_nlte"];
+    $feh_nlte = $_SESSION["feh_nlte"] = $_POST["feh_nlte"];
+    $ao1 = $_SESSION["ao1"] = $_POST["ao1"];
+    $ao2 = $_SESSION["ao2"] = $_POST["ao2"];
+    $ao3 = $_SESSION["ao3"] = $_POST["ao3"];
     if ($errMsg == "") {
-      $teff_nlte = $_SESSION["teff_nlte"] = $_POST["teff_nlte"];
-      $logg_nlte = $_SESSION["logg_nlte"] = $_POST["logg_nlte"];
-      $feh_nlte = $_SESSION["feh_nlte"] = $_POST["feh_nlte"];
-      $ao1 = $_SESSION["ao1"] = $_POST["ao1"];
-      $ao2 = $_SESSION["ao2"] = $_POST["ao2"];
-      $ao3 = $_SESSION["ao3"] = $_POST["ao3"];
       $cmd = "nlte_triplet.py $teff_nlte $logg_nlte $feh_nlte $ao1 $ao2 $ao3";
       exec($cmd, $res);
       if (substr($res[0], 0, 3) != "Wav") {
@@ -155,11 +159,15 @@
         $_SESSION["d0"] = $d0;
         $_SESSION["d1"] = $d1;
         $_SESSION["d2"] = $d2;
+        header("Location:".$_SERVER["PHP_SELF"]);
+        exit();
       }
     }
     $_SESSION["errMsg"] = $errMsg;
-    header("Location:".$_SERVER["PHP_SELF"]);
-    exit();
+    if ($errMsg != "") {
+      header("Location:".$_SERVER["PHP_SELF"]);
+      exit();
+    }
   }
   if(isset($_SESSION["teff_nlte"])) {
     $errMsg = $_SESSION["errMsg"];
