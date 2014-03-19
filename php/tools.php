@@ -1,7 +1,7 @@
 <?php
 
   $PATH = getenv("PATH");
-  if ($_SERVER["SERVER_NAME"] == "lvfp.astrochasqui.webfactional.com") {
+  if ($_SERVER["SERVER_NAME"] == "astro.astrochasqui.webfactional.com") {
     putenv("PATH=".
                 "/home/astrochasqui/code/python:".
                 "/home/astrochasqui/bin:".
