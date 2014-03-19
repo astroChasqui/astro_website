@@ -1,24 +1,84 @@
 <?php
 
-  session_start();
-
-  /*
   $PATH = getenv("PATH");
-  putenv("PATH=".
-              "/home/ivan/Dropbox/Code/python:".
-              "/home/ivan/Programs/anaconda/bin:".
-              "$PATH");
-  putenv("XDG_CONFIG_HOME=/var/www");
-  */
-
-  $PATH = getenv("PATH");
-  putenv("PATH=".
-              "/home/astrochasqui/code/python:".
-              "/home/astrochasqui/bin:".
-              "$PATH");
-  putenv("XDG_CONFIG_HOME=/home/astrochasqui/webapps/astro");
+  if ($_SERVER["SERVER_NAME"] == "lvfp.astrochasqui.webfactional.com") {
+    putenv("PATH=".
+                "/home/astrochasqui/code/python:".
+                "/home/astrochasqui/bin:".
+                "$PATH");
+    putenv("XDG_CONFIG_HOME=/home/astrochasqui/webapps/astro");
+  } else {
+    putenv("PATH=".
+                "/home/ivan/Dropbox/Code/python:".
+                "/home/ivan/Programs/anaconda/bin:".
+                "$PATH");
+    putenv("XDG_CONFIG_HOME=/var/www");
+  }
 
   $errMsg = "";
+
+  // Y2 Isochrone Stellar Parameters
+  $starname_yypars = "Sun";
+  $teff_yypars = 5777;
+  $err_teff_yypars = 5;
+  $logg_yypars = 4.44;
+  $err_logg_yypars = 0.01;
+  $feh_yypars = "0.00";
+  $err_feh_yypars = 0.01;
+
+  if(isset($_POST["yypars"])) {
+    $x = array("teff_yypars", "err_teff_yypars",
+               "logg_yypars", "err_logg_yypars",
+               "feh_yypars", "err_feh_yypars",);
+    foreach($x as $xi)
+      if ($_POST[$xi] == "")
+         $errMsg = "[Y<sup>2</sup> Age and Mass] One or more fields are ".
+                   "empty.";
+    $starname = $_SESSION["starname_yypars"] = $_POST["starname_yypars"];
+    $teff = $_SESSION["teff_yypars"] = $_POST["teff_yypars"];
+    $err_teff = $_SESSION["err_teff_yypars"] = $_POST["err_teff_yypars"];
+    $logg = $_SESSION["logg_yypars"] = $_POST["logg_yypars"];
+    $err_logg = $_SESSION["err_logg_yypars"] = $_POST["err_logg_yypars"];
+    $feh = $_SESSION["feh_yypars"] = $_POST["feh_yypars"];
+    $err_feh = $_SESSION["err_feh_yypars"] = $_POST["err_feh_yypars"];
+    if ($errMsg == "") {
+      $star = "'$starname'\__t$teff+-$err_teff.g$logg+-$err_logg.".
+              "f$feh+-$err_feh";
+      $cmd = "yypars.py $star $teff $err_teff $logg $err_logg ".
+             "$feh $err_feh -d tools_files";
+      $res = exec($cmd, $outs, $out);
+      $fname = str_replace("'", "",
+                           str_replace(" ", "_", stripslashes($star)));
+      $fname_age = "tools_files/$fname"."_yyage_logg.png";
+      $fname_all = "tools_files/$fname"."_yypar_logg.png";
+      if (file_exists($fname_age)) {
+        $_SESSION["outs_yypars"] = $outs;
+        $_SESSION["figure_age_yypars"] = $fname_age;
+        $_SESSION["figure_all_yypars"] = $fname_all;
+      } else {
+        $errMsg = "[Y<sup>2</sup> Age and Mass] Could not calculate ".
+                  "parameters for this star.";
+      }
+    }
+    $_SESSION["errMsg"] = $errMsg;
+    header("Location:".$_SERVER["PHP_SELF"]);
+    exit();
+  }
+  if(isset($_SESSION["teff_yypars"])) {
+    $errMsg = $_SESSION["errMsg"];
+    $starname_yypars = $_SESSION["starname_yypars"];
+    $teff_yypars = $_SESSION["teff_yypars"];
+    $err_teff_yypars = $_SESSION["err_teff_yypars"];
+    $logg_yypars = sprintf("%.2f", $_SESSION["logg_yypars"]);
+    $err_logg_yypars = sprintf("%.2f", $_SESSION["err_logg_yypars"]);
+    $feh_yypars = sprintf("%.2f", $_SESSION["feh_yypars"]);
+    $err_feh_yypars = sprintf("%.2f", $_SESSION["err_feh_yypars"]);
+    $outs_yypars = $_SESSION["outs_yypars"];
+    $figure_age_yypars = $_SESSION["figure_age_yypars"];
+    $figure_all_yypars = $_SESSION["figure_all_yypars"];
+    $_SESSION = array();
+    session_destroy();
+  }
 
   // Color-Teff
 
@@ -148,7 +208,7 @@
       $cmd = "nlte_triplet.py $teff_nlte $logg_nlte $feh_nlte $ao1 $ao2 $ao3";
       exec($cmd, $res);
       if (substr($res[0], 0, 3) != "Wav") {
-        $errMsg = "[Non-LTE corrections] $res[0]";
+        $errMsg = "[Non-LTE corrections] Could not calculate corrections.";
       } else {
         $x = explode("|", $res[1]); $d0 = 1.*$x[2];
         $x = explode("|", $res[2]); $d1 = 1.*$x[2];

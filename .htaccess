@@ -1,2 +1,2 @@
 AddType application/x-httpd-php .html
-AddHandler php54-cgi site .shtml .html .html .php
+#AddHandler php54-cgi site .shtml .html .html .php

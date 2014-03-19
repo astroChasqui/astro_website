@@ -21,6 +21,7 @@ session_start();
       <p align="right">Click on the headers for info.</p>
 
       <?php
+        //print_r($_SESSION);
         include "php/tools.php";
         if ($errMsg != "") echo "<strong>$errMsg</strong>";
       ?>
@@ -55,78 +56,125 @@ session_start();
                  value="<?php echo $color_teff_value;?>">
         </form>
 
-    <h3 id="mag_info_switch" onclick="showInfo('mag_info');">
-        + Model Atmosphere Generator
-    </h3>
-      <p id="mag_info" class="tools_info" hidden>
-        Generates an input model atmosphere for MOOG. If not found in the grid, linear interpolation is performed. Kurucz and MARCS models are available. The output file is in MOOG's KURUCZ format.
-      </p>
-      <form method="post">
-        T<sub>eff</sub> =
-        <input type="text" name="teff_mag" style="width: 45px;" maxlength="4"
-               value="<?php echo $teff_mag;?>">
-        log g =
-        <input type="text" name="logg_mag" style="width: 45px;" maxlength="4"
-                value="<?php echo $logg_mag;?>">
-        [Fe/H] =
-        <input type="text" name="feh_mag" style="width: 50px;" maxlength="5"
-               value="<?php echo $feh_mag;?>">
-        vt =
-        <input type="text" name="vt_mag" style="width: 45px;" maxlength="4"
-               value="<?php echo $vt_mag;?>">
-        <br />
-        Grid:
-        <select name="grid_mag">
-          <?php
-            $grids = array("odfnew", "aodfnew", "over", "nover", "marcs");
-            foreach ($grids as $agrid) {
-              if ($agrid == $grid_mag) $sel="selected"; else $sel="";
-              echo "<option $sel>$agrid</option>";
-            }
-        ?>
-        </select>
-        <input type="submit" name="model_atmosphere_generator" value="Submit">
-      </form>
-
-    <h3 id="nlte_info_switch" onclick="showInfo('nlte_info');">
-        + Non-LTE corrections for the 777 nm O I lines
-    </h3>
-      <p id="nlte_info" class="tools_info" hidden>
-        Uses Ramirez et al. (2007) grid to calculate non-LTE corrections to the oxygen abundances, A(O), inferred from the 777 nm O I lines.
-      </p>
-      <form method="post">
+      <h3 id="mag_info_switch" onclick="showInfo('mag_info');">
+          + Model Atmosphere Generator
+      </h3>
+        <p id="mag_info" class="tools_info" hidden>
+          Generates an input model atmosphere for MOOG. If not found in the grid, linear interpolation is performed. Kurucz and MARCS models are available. The output file is in MOOG's KURUCZ format.
+        </p>
+        <form method="post">
           T<sub>eff</sub> =
-          <input type="text" name="teff_nlte" maxlength="4"
-                 style="width: 45px;" value='<?php echo $teff_nlte;?>'>
+          <input type="text" name="teff_mag" style="width: 45px;" maxlength="4"
+                 value="<?php echo $teff_mag;?>">
           log g =
-          <input type="text" name="logg_nlte" maxlength="4"
-                 style="width: 45px;" value='<?php echo $logg_nlte;?>'>
+          <input type="text" name="logg_mag" style="width: 45px;" maxlength="4"
+                  value="<?php echo $logg_mag;?>">
           [Fe/H] =
-          <input type="text" name="feh_nlte" maxlength="5"
-                 style="width: 50px;" value='<?php echo $feh_nlte;?>'>
+          <input type="text" name="feh_mag" style="width: 50px;" maxlength="5"
+                 value="<?php echo $feh_mag;?>">
+          vt =
+          <input type="text" name="vt_mag" style="width: 45px;" maxlength="4"
+                 value="<?php echo $vt_mag;?>">
           <br />
-          A(O) = <input type="text" name="ao1" value='<?php echo $ao1;?>'
-                        style="width: 45px;" maxlength="4">
-                 <input type="text" name="ao2" value='<?php echo $ao2;?>'
-                        style="width: 45px;" maxlength="4">
-                 <input type="text" name="ao3" value='<?php echo $ao3;?>'
-                        style="width: 45px;" maxlength="4">
-        <input type="submit" name="nlte" value="Submit" />
-        <br />
-        Non-LTE corrections =
-        <input type="text" name="d1" disabled
-               style="width: 50px; color: green;" maxlength="4"
-               value='<?php echo $d0;?>'>
-        <input type="text" name="d2" disabled
-               style="width: 50px; color: green;" maxlength="4"
-               value='<?php echo $d1;?>'>
-        <input type="text" name="d3" disabled
-               style="width: 50px; color: green;" maxlength="4"
-               value='<?php echo $d2;?>'>
-      </form>
+          Grid:
+          <select name="grid_mag">
+            <?php
+              $grids = array("odfnew", "aodfnew", "over", "nover", "marcs");
+              foreach ($grids as $agrid) {
+                if ($agrid == $grid_mag) $sel="selected"; else $sel="";
+                echo "<option $sel>$agrid</option>";
+              }
+          ?>
+          </select>
+          <input type="submit" name="model_atmosphere_generator" value="Submit">
+        </form>
+
+      <h3 id="nlte_info_switch" onclick="showInfo('nlte_info');">
+          + Non-LTE corrections for the 777 nm O I lines
+      </h3>
+        <p id="nlte_info" class="tools_info" hidden>
+          Uses Ramirez et al. (2007) grid to calculate non-LTE corrections to the oxygen abundances, A(O), inferred from the 777 nm O I lines.
+        </p>
+        <form method="post">
+            T<sub>eff</sub> =
+            <input type="text" name="teff_nlte" maxlength="4"
+                   style="width: 45px;" value='<?php echo $teff_nlte;?>'>
+            log g =
+            <input type="text" name="logg_nlte" maxlength="4"
+                   style="width: 45px;" value='<?php echo $logg_nlte;?>'>
+            [Fe/H] =
+            <input type="text" name="feh_nlte" maxlength="5"
+                   style="width: 50px;" value='<?php echo $feh_nlte;?>'>
+            <br />
+            A(O) = <input type="text" name="ao1" value='<?php echo $ao1;?>'
+                          style="width: 45px;" maxlength="4">
+                   <input type="text" name="ao2" value='<?php echo $ao2;?>'
+                          style="width: 45px;" maxlength="4">
+                   <input type="text" name="ao3" value='<?php echo $ao3;?>'
+                          style="width: 45px;" maxlength="4">
+          <input type="submit" name="nlte" value="Submit">
+          <br />
+          Non-LTE corrections =
+          <input type="text" name="d1" disabled
+                 style="width: 50px; color: green;" maxlength="4"
+                 value='<?php echo $d0;?>'>
+          <input type="text" name="d2" disabled
+                 style="width: 50px; color: green;" maxlength="4"
+                 value='<?php echo $d1;?>'>
+          <input type="text" name="d3" disabled
+                 style="width: 50px; color: green;" maxlength="4"
+                 value='<?php echo $d2;?>'>
+        </form>
+
+      <h3 id="yypars_info_switch" onclick="showInfo('yypars_info');">
+          + Y<sup>2</sup> Age and Mass
+      </h3>
+        <p id="yypars_info" class="tools_info" hidden>
+          Uses Yonsei-Yale isochrones to calculate a star's age and mass. For each parameter, enter value and 1-sigma error. The result shows first the most probable value and then, within square brackets, the 1- and 2-sigma lower/upper limits, respectively.
+        </p>
+        <form method="post">
+          Star name =
+          <input type="text" name="starname_yypars"
+                 style="width: 100px;text-align:left;"
+                 value="<?php echo $starname_yypars;?>">
+          <input type="submit" name="yypars" value="Submit" >
+          <br />
+          T<sub>eff</sub> =
+          <input type="text" name="teff_yypars" style="width: 45px;"
+                 maxlength="4" value="<?php echo $teff_yypars;?>">
+          <input type="text" name="err_teff_yypars"
+                 style="width: 30px;text-align:right;"
+                 maxlength="3" value="<?php echo $err_teff_yypars;?>">
+          log g =
+          <input type="text" name="logg_yypars" style="width: 45px;"
+                 maxlength="4" value="<?php echo $logg_yypars;?>">
+          <input type="text" name="err_logg_yypars" style="width: 45px;"
+                 maxlength="4" value="<?php echo $err_logg_yypars;?>">
+          [Fe/H] =
+          <input type="text" name="feh_yypars"
+                 maxlength="5" style="width: 50px;"
+                 value="<?php echo $feh_yypars;?>">
+          <input type="text" name="err_feh_yypars"
+                 maxlength="5" style="width: 50px;"
+                 value="<?php echo $err_feh_yypars;?>">
+        </form>
+
+        <?php
+          if(isset($outs_yypars)) {
+            echo "<div style='text-align:center;color:green;'>
+                    <br />$outs_yypars[2]<br />
+                          $outs_yypars[3]<br />
+                    <br />Probability density plots:
+                    <a href='$figure_age_yypars' target='_blank'>AGE</a>
+                    <a href='$figure_all_yypars' target='_blank'>ALL</a>
+                  </div>";
+          }
+        ?>
 
     </div>
+
     <?php include "footer.html"?>
+
   </div>
 </body>
 
