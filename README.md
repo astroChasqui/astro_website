@@ -1,2 +1,2 @@
-HTML+CSS+JS+PHP code for my astro website:
-http://www.as.utexas.edu/~ivan
+HTML+CSS+JS+PHP code for my professional astronomy website:
+http://astro.astrochasqui.webfactional.com/
