@@ -128,3 +128,60 @@ body#body_q2 a#menu_q2
 {
   color: #0066CC;
 }
+
+/*Style 'show menu' label button and hide it by default*/
+.show-menu {
+  color: #336600;
+  xbackground: #19c589;
+  text-align: center;
+  padding: 10px 0;
+  display: none;
+}
+/*Hide checkbox*/
+input[type=checkbox]{
+  display: none;
+}
+
+#menu hr {
+  display: none;
+}
+
+/*Show menu when invisible checkbox is checked*/
+input[type=checkbox]:checked ~ #menu{
+  display: block;
+}
+
+@media screen and (max-width: 400px)  {
+
+  #menu {
+    display: none;
+  }
+  #menu hr {
+    display: block;
+  }
+  .show-menu {
+    display: block;
+	}
+  #header li {
+    display: block;
+    padding: 5px 0;
+	}
+
+  #container {
+    width: 100%;
+  }
+  #content img {
+    float: left !important;
+    width: 90%;
+    margin-bottom: 15px;
+  }
+  #content p {
+    clear: both;
+  }
+  #footer {
+    clear: both;
+  }
+  #ads_query_importer_widget {
+    width: 100% !important;
+  }
+}
