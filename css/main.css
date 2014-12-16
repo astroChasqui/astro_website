@@ -138,7 +138,7 @@ body#body_q2 a#menu_q2
   display: none;
 }
 /*Hide checkbox*/
-input[type=checkbox]{
+#header input[type=checkbox]{
   display: none;
 }
 
